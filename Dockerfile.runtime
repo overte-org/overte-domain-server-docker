@@ -45,8 +45,11 @@ RUN chmod +x /opt/overte/domain-server && \
 COPY ./files/overte.conf /etc/supervisor/conf.d/overte.conf
 
 # Expose required ports
-EXPOSE 40100 40101 40102
-EXPOSE 40100/udp 40101/udp 40102/udp
+# WebUI
+EXPOSE 40100/tcp 40101/tcp
+# connection
+EXPOSE 40102/udp 40103/udp
+# assignment clients
 EXPOSE 48000/udp 48001/udp 48002/udp 48003/udp 48004/udp 48005/udp 48006/udp
 
 ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/overte.conf"]
