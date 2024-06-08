@@ -14,7 +14,7 @@ To build the domain server runtime image (Dockerfile.runtime), you must first bu
 
 - Build the builder image by running the following command (lengthy process): 
 ```sh 
-docker build -t domain-server-builder -f ./Dockerfile.build .
+docker build --build-arg "TAG=2024.06.1" -t domain-server-builder -f ./Dockerfile.build .
 ```
 - Upon completion of the above, build the runtime container with the following command:
 ```sh 
