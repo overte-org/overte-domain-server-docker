@@ -23,7 +23,13 @@ RUN cd /opt/overte-build \
     && export OVERTE_USE_SYSTEM_QT=1 \
     && export RELEASE_TYPE=PRODUCTION \
     && export RELEASE_NUMBER=${TAG} \
-    && cmake -DSERVER_ONLY=1 -DBUILD_TOOLS=1 -DOVERTE_CPU_ARCHITECTURE=-msse3 ..
+    && if [ $(uname -m) == "x86_64" ]; then \
+        # amd64 \
+        cmake -DSERVER_ONLY=1 -DBUILD_TOOLS=1 -DOVERTE_CPU_ARCHITECTURE=-msse3 ..; \
+    else \
+        # aarch64 \
+        VCPKG_FORCE_SYSTEM_BINARIES=1 cmake -DSERVER_ONLY=1 -DBUILD_TOOLS=1 -DOVERTE_CPU_ARCHITECTURE= ..; \
+    fi
 
 # put number after -j to limit cores.
 RUN cd /opt/overte-build/build \
