@@ -18,7 +18,7 @@ docker build --build-arg "TAG=2024.06.1" -t domain-server-builder -f ./Dockerfil
 ```
 - Upon completion of the above, build the runtime container with the following command:
 ```sh 
-docker build -t domain-server -f ./Dockerfile.runtime .
+docker build -t overte/overte-server -f ./Dockerfile.runtime .
 ```
 
 - Once the build is completed, you will be able to run the domain server either with docker-compose (see the contained file and change the `image` to `domain-server`), or by running the following:
@@ -30,3 +30,14 @@ docker run -d --name overte-server -p 40100-40102:40100-40102 -p 40100-40102:401
 
 If you would prefer, a prebuilt image for amd64 environments can be used by replacing `domain-server` with `ghcr.io/overte-org/overte-domain-server-docker/domain-server:latest` in either the `docker run` command or the `docker-compose.yml` file.
 
+# Pushing a release
+
+When pushing a new release, don't forget to create a manifest that contains aarch64 and amd64:
+```bash
+docker push overte/overte-server:2024.06.1-amd64
+docker push overte/overte-server:2024.06.1-aarch64
+docker manifest create overte/overte-server:2024.06.1 --amend overte/overte-server:2024.06.1-amd64 --amend overte/overte-server:2024.06.1-aarch64
+docker manifest push overte/overte-server:2024.06.1
+docker manifest create overte/overte-server:latest --amend overte/overte-server:2024.06.1-amd64 --amend overte/overte-server:2024.06.1-aarch64
+docker manifest push overte/overte-server:latest
+```
