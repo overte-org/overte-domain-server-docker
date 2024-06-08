@@ -31,9 +31,11 @@ COPY --from=build /opt/overte/domain-server /opt/overte
 COPY --from=build /opt/overte/assignment-client /opt/overte
 COPY --from=build /opt/overte/plugins /opt/overte/plugins
 COPY --from=build /opt/overte/resources /opt/overte/resources
+COPY --from=build /opt/overte/oven /opt/overte
 
 RUN chmod +x /opt/overte/domain-server && \
-    chmod +x /opt/overte/assignment-client 
+    chmod +x /opt/overte/assignment-client && \
+    chmod +x /opt/overte/oven
 
 # Server run test
 # RUN /opt/overte/domain-server --version > /opt/overte/version && \
