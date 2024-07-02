@@ -14,11 +14,11 @@ To build the domain server runtime image (Dockerfile.runtime), you must first bu
 
 - Build the builder image by running the following command (lengthy process): 
 ```sh 
-docker build --build-arg "TAG=2024.06.1" -t domain-server-builder -f ./Dockerfile.build .
+docker build --no-cache --build-arg "TAG=2024.06.1" -t domain-server-builder -f ./Dockerfile.build .
 ```
 - Upon completion of the above, build the runtime container with the following command:
 ```sh 
-docker build -t overte/overte-server -f ./Dockerfile.runtime .
+docker build --no-cache -t overte/overte-server -f ./Dockerfile.runtime .
 ```
 
 - Once the build is completed, you will be able to run the domain server either with docker-compose (see the contained file and change the `image` to `domain-server`), or by running the following:
