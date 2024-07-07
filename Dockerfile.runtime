@@ -1,5 +1,5 @@
-# Overte Server runtime image. domain-server-builder must be built first. (Updated 02/07/2024)
-FROM ghcr.io/overte-org/overte-domain-server-docker/domain-server-builder:latest as build
+# Overte Server runtime image. domain-server-builder must be built first.
+FROM domain-server-builder:latest as build
 
 LABEL maintainer="OfficialR3ido101 (https://github.com/OfficialR3ido101)"
 LABEL description="Overte domain server runtime"
@@ -31,9 +31,11 @@ COPY --from=build /opt/overte/domain-server /opt/overte
 COPY --from=build /opt/overte/assignment-client /opt/overte
 COPY --from=build /opt/overte/plugins /opt/overte/plugins
 COPY --from=build /opt/overte/resources /opt/overte/resources
+COPY --from=build /opt/overte/oven /opt/overte
 
 RUN chmod +x /opt/overte/domain-server && \
-    chmod +x /opt/overte/assignment-client 
+    chmod +x /opt/overte/assignment-client && \
+    chmod +x /opt/overte/oven
 
 # Server run test
 # RUN /opt/overte/domain-server --version > /opt/overte/version && \
@@ -43,8 +45,11 @@ RUN chmod +x /opt/overte/domain-server && \
 COPY ./files/overte.conf /etc/supervisor/conf.d/overte.conf
 
 # Expose required ports
-EXPOSE 40100 40101 40102
-EXPOSE 40100/udp 40101/udp 40102/udp
+# WebUI
+EXPOSE 40100/tcp 40101/tcp
+# connection
+EXPOSE 40102/udp 40103/udp
+# assignment clients
 EXPOSE 48000/udp 48001/udp 48002/udp 48003/udp 48004/udp 48005/udp 48006/udp
 
 ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/overte.conf"]
