@@ -1,6 +1,8 @@
 # Docker environment for building Overte server
 FROM ubuntu:22.04
 
+SHELL ["/bin/bash", "-c"]
+
 ARG TAG=master # build master if no tag is defined
 
 ARG DEBIAN_FRONTEND=noninteractive
