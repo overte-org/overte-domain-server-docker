@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   overte-server:
-    image:  docker.io/overte/overte-server:latest
+    image: docker.io/overte/overte-server:latest
     container_name: overte-server
     restart: unless-stopped
     expose:
