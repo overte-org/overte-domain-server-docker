@@ -1,12 +1,10 @@
-# Build Status
-
-[![Podman-Build](https://github.com/overte-org/overte-domain-server-docker/actions/workflows/deploy.yaml/badge.svg)](https://github.com/overte-org/overte-domain-server-docker/actions/workflows/deploy.yaml)
-
 # Overte Domain Server Docker Images
 
 Contained in this repo are two docker images which are used to build and run the Overte domain server as a docker image.
 
 Also contained is a docker-compose.yml file to run the domain server on your server using docker-compose.
+
+The Domain server image is published to Docker Hub for amd64 and aarch64 architecture. Pull it from here: https://hub.docker.com/r/overte/overte-server
 
 # Caveats
 
@@ -30,10 +28,6 @@ docker build --no-cache -t overte/overte-server -f ./Dockerfile.runtime .
 ```sh
 docker run -d --name overte-server -p 40100-40102:40100-40102 -p 40100-40102:40100-40102/udp -p 48000-48006:48000-48006/udp -v $(pwd)/logs:/var/log -v $(pwd)/data:/root/.local/share/Overte --restart unless-stopped domain-server
 ```
-
-# Prebuilt Image
-
-If you would prefer, a prebuilt image for amd64 environments can be used by replacing `domain-server` with `ghcr.io/overte-org/overte-domain-server-docker/domain-server:latest` in either the `docker run` command or the `docker-compose.yml` file.
 
 # Pushing a release
 
