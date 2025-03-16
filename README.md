@@ -35,8 +35,9 @@ When pushing a new release, don't forget to create a manifest that contains aarc
 ```bash
 docker push overte/overte-server:2024.06.1-amd64
 docker push overte/overte-server:2024.06.1-aarch64
-docker manifest create overte/overte-server:2024.06.1 --amend overte/overte-server:2024.06.1-amd64 --amend overte/overte-server:2024.06.1-aarch64
+docker manifest create overte/overte-server:2024.06.1 overte/overte-server:2024.06.1-amd64 overte/overte-server:2024.06.1-aarch64
 docker manifest push overte/overte-server:2024.06.1
-docker manifest create overte/overte-server:latest --amend overte/overte-server:2024.06.1-amd64 --amend overte/overte-server:2024.06.1-aarch64
+docker manifest rm overte/overte-server:latest
+docker manifest create overte/overte-server:latest overte/overte-server:2024.06.1-amd64 overte/overte-server:2024.06.1-aarch64
 docker manifest push overte/overte-server:latest
 ```
