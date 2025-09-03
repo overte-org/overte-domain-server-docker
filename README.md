@@ -21,12 +21,12 @@ docker build --no-cache --build-arg "TAG=2024.06.1" -t domain-server-builder -f 
 ```
 - Upon completion of the above, build the runtime container with the following command:
 ```sh 
-docker build --no-cache -t overte/overte-server -f ./Dockerfile.runtime .
+docker build --no-cache -t overte/overte-server:2024.06.1-amd64 -f ./Dockerfile.runtime .
 ```
 
 - Once the build is completed, you will be able to run the domain server either with docker-compose (see the contained file and change the `image` to `domain-server`), or by running the following:
 ```sh
-docker run -d --name overte-server -p 40100-40102:40100-40102 -p 40100-40102:40100-40102/udp -p 48000-48006:48000-48006/udp -v $(pwd)/logs:/var/log -v $(pwd)/data:/root/.local/share/Overte --restart unless-stopped domain-server
+docker run -d --name overte-server -p 40100-40102:40100-40102 -p 40100-40102:40100-40102/udp -p 48000-48006:48000-48006/udp -v $(pwd)/logs:/var/log -v $(pwd)/data:/root/.local/share/Overte --restart unless-stopped overte/overte-server:2024.06.1-amd64
 ```
 
 # Pushing a release
