@@ -16,8 +16,7 @@ RUN apt update && apt install -y python3-full zip tzdata curl ninja-build git cm
     libqt5websockets5-dev qtscript5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5webchannel5-dev qtwebengine5-dev libqt5xmlpatterns5-dev sudo
 
 # Install Conan
-ARG TARGETARCH
-RUN if [ $TARGETARCH = "arm64" ]; then \
+RUN if [ $(uname -m) = "aarch64" ]; then \
         curl -L --output conan.deb https://github.com/conan-io/conan/releases/download/2.20.0/conan-2.20.0-arm64.deb \
     ; else \
         curl -L --output conan.deb https://github.com/conan-io/conan/releases/download/2.20.0/conan-2.20.0-amd64.deb \
