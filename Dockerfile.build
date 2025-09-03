@@ -1,5 +1,5 @@
-# Docker environment for building Overte server (Updated 02/07/2024)
-FROM ubuntu:22.04
+# Docker environment for building Overte server
+FROM ubuntu:24.04
 
 SHELL ["/bin/bash", "-c"]
 
@@ -12,7 +12,7 @@ RUN mkdir /opt/overte-build \
     && mkdir /opt/overte
 
 # Install dependencies
-RUN apt update && apt install -y python3-full zip tzdata curl ninja-build git cmake g++ libssl-dev python3-distutils python3-distro mesa-common-dev libgl1-mesa-dev \
+RUN apt update && apt install -y python3-full zip tzdata curl ninja-build git cmake g++ libssl-dev python3-distro mesa-common-dev libgl1-mesa-dev \
     libqt5websockets5-dev qtscript5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5webchannel5-dev qtwebengine5-dev libqt5xmlpatterns5-dev
 
 # Fetch repository

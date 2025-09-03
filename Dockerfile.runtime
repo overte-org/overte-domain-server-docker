@@ -4,7 +4,7 @@ FROM domain-server-builder:latest as build
 LABEL maintainer="OfficialR3ido101 (https://github.com/OfficialR3ido101)"
 LABEL description="Overte domain server runtime"
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TERM=linux
