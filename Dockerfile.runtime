@@ -16,14 +16,13 @@ RUN echo 'APT::Install-Recommends "0";' >> /etc/apt/apt.conf.d/00-docker
 
 # Install dependencies
 RUN apt update && apt install -y tzdata supervisor libopengl-dev ca-certificates \
-    libqt5widgets5 libqt5network5 libqt5script5 libqt5core5a libqt5qml5 libqt5websockets5 libqt5gui5
+    libqt5widgets5 libqt5network5 libqt5core5a libqt5qml5 libqt5websockets5 libqt5gui5
 
 # Cleanup
 RUN apt clean && rm -rf /var/lib/app/lists/*
 
 # Install libraries
-COPY --from=build /opt/overte/libraries/*/*.so /lib/
-COPY --from=build /opt/overte/libraries/libnode.so.108 /lib/
+COPY --from=build /opt/overte/libraries/*/*.so* /lib/
 
 # Fetch built services
 RUN mkdir /opt/overte
