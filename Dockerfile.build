@@ -33,9 +33,9 @@ RUN cd /opt/overte-build \
     && conan remote add overte https://artifactory.overte.org/artifactory/api/conan/overte \
     && echo "tools.system.package_manager:mode = install" >> ~/.conan2/global.conf \
     && echo "tools.system.package_manager:sudo = True" >> ~/.conan2/global.conf \
-    && conan install . -s compiler.cppstd=gnu17 -s build_type=Release -o Overte/*:qt_source=system -b missing -of build -pr:b=default \
+    && conan install . -s build_type=Release -o Overte/*:qt_source=system -b missing -of build -pr:a=tools/conan-profiles/linux \
     # Run twice to work around OpenSSL not being found.
-    && conan install . -s compiler.cppstd=gnu17 -s build_type=Release -o Overte/*:qt_source=system -b missing -of build -pr:b=default \
+    && conan install . -s build_type=Release -o Overte/*:qt_source=system -b missing -of build -pr:a=tools/conan-profiles/linux \
     && cmake --preset conan-release -DOVERTE_RELEASE_NUMBER=${TAG} -DOVERTE_GIT_COMMIT_SHORT=0 -DOVERTE_RELEASE_TYPE=PRODUCTION \
     && cmake --build --preset conan-release --target domain-server assignment-client oven
 
