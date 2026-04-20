@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   overte-server:
     image: docker.io/overte/overte-server:latest
